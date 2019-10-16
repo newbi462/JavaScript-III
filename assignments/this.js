@@ -4,7 +4,7 @@
 * 1.  Window/Global Object Binding: the global scop or where you are running the code....
 * 2.  Implicit Binding: The scope if what you are runing it in such as an object... (to the left of the ".")
 * 3.  New binding: When you invoce a "new" operation using a funtion built on this.x operations
-* 4.  Explicit Binding: When you define it using .call and so on... 
+* 4.  Explicit Binding: When you define it using .call and so on...
 *
 * write out a code example of each explanation above
 */
@@ -41,4 +41,15 @@ console.log(stuff);
 
 
 // code example for Explicit Binding
-x.constructor.call(inplaceofx);
+function GameObject(values) {
+  this.createdAt = values.createdAt;
+  this.name = values.name;
+  this.dimensions = values.dimensions;
+//  this.destroy = function() { return `${this.name} was removed from the game.` };
+};
+GameObject.prototype.destroy = function() { return `${this.name} was removed from the game.` };
+
+function CharacterStart(stats) {
+  this.healthPoints = stats.healthPoints;
+  GameObject.call(this, stats); // linked to GameObject
+};
